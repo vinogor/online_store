@@ -1,28 +1,32 @@
-package com.task.market.service;
+package com.task.market.controller;
 
-import com.task.market.entity.Item;
-import com.task.market.entity.ProductItem;
-import com.task.market.Stock;
+import com.task.market.model.Consumer;
+import com.task.market.model.Item;
+import com.task.market.model.Stock;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
 
-public class SellerService {
+// касса
 
-    public Stock stock;
+// reciver
+
+public class CashDesk {
+
+    private Stock stock;
     private Consumer consumer;
 
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-    public SellerService(Stock stock, Consumer consumer) {
+    public CashDesk(Stock stock, Consumer consumer) {
         this.stock = stock;
         this.consumer = consumer;
     }
 
     public void start() {
-        hello();
+        greeting();
         showListOfActions();
         try {
             action();
@@ -31,7 +35,7 @@ public class SellerService {
         }
     }
 
-    void hello() {
+    private void greeting() {
         System.out.println("Приветствуем вас в нашем магазине. Что изволите?");
     }
 
@@ -46,32 +50,34 @@ public class SellerService {
     private void action() throws IOException {
 
         String action = "";
-        int num;
+        int id;
 
         while (!action.equals("finish")) {
             System.out.println("Введите номер действия: ");
             action = reader.readLine();
+
+
+
             switch (action) {
-                case "1":
-                    stock.printAllStock();
+                case "1": // вывести на экран
+
+                    stock.printStock();
                     break;
                 case "2": // добавить товар по номеру в корзину
                     System.out.println("Введите номер товара и я положу его вам в корзину");
-                    num = Integer.parseInt(reader.readLine());
-                    // берём со склада ( делает -1 и возвращает товар)
-                    Item item = stock.takeItem(num);
+                    id = Integer.parseInt(reader.readLine());
+                    // берём со склада ( делаем -1 и возвращает товар)
+                    Item item = stock.takeItems(1, id);
                     // кладём к корзину покупателя
-                    consumer.putItemInBasket(item);
+                    consumer.putOneItem(item);
                     break;
                 case "3":
                     consumer.showBasket();
                     break;
-                case "4": // очистить корзину (положить всё обратно на склад)
-                    for (Map.Entry<String, ProductItem> pair : consumer.getBasket().entrySet()) {
-                        int index = stock.isItemExist(pair.getValue().getItem());
-                        for (int i = 0; i < pair.getValue().getQuantity(); i++) {
-                            stock.putItem(index);
-                        }
+                case "4": // очистить корзину (+ положить всё обратно на склад)
+                    for (Map.Entry<Integer, Item> pair : consumer.getBasket().entrySet()) {
+                        Item itemFromBasket = pair.getValue();
+                        stock.putItems(itemFromBasket.getQuantity(), itemFromBasket.getId());
                     }
                     consumer.clearBasket();
                     break;

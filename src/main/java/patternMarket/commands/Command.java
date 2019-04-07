@@ -1,4 +1,4 @@
-package patternMarket;
+package patternMarket.commands;
 
 public interface Command {
     void execute();

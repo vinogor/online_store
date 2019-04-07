@@ -1,6 +1,8 @@
 package patternMarket;
 
 
+import patternMarket.entity.Store;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -12,9 +14,9 @@ public class Main {
         store.addItem("Пистолет", 50, 100);
         store.addItem("Карандаш", 10, 1);
 
-        Seller seller = new Seller(store);
 
-        Market market = new Market(seller);
+
+        Market market = new Market(store);
 
         market.start();
 

@@ -1,4 +1,4 @@
-package patternMarket;
+package patternMarket.entity;
 
 public class Item {
     private String name;
@@ -6,11 +6,10 @@ public class Item {
     private int quantity;
 
 
-    Item(String name, int price, int quantity) {
+    public Item(String name, int price, int quantity) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
-        System.out.println("    на склад завезли новый товар " + name + " в кол-ве " + quantity + " шт., цена: " + price);
     }
 
     public String getName() {
@@ -31,15 +30,16 @@ public class Item {
 
     public void setGivenQuantity(int quantity) {
         this.quantity += quantity;
-        System.out.println("    увеличиваем код-во товара на складе " + name + " на " + quantity + ". Итого стало: " + this.quantity);
     }
 
-    public void incQuantity() {
-        this.quantity++;
+
+
+    public void incQuantity(int quantity) {
+        this.quantity += quantity;
     }
 
-    public void decQuantity() {
-        this.quantity--;
+    public void decQuantity(int quantity) {
+        this.quantity -= quantity;
     }
 
     @Override

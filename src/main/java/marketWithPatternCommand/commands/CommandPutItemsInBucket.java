@@ -23,6 +23,6 @@ public class CommandPutItemsInBucket implements Command {
         int quantity = buyer.getQuantity();
 
         store.takeItems(name, quantity);
-        bucket.putItem(name, new Item(name, store.getPriceByName(name), quantity));
+        bucket.putItem(name, new Item(name, store.getPriceByName(name), store.getCurrencyByName(name), quantity));
     }
 }

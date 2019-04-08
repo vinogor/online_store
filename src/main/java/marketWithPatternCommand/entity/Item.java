@@ -3,13 +3,19 @@ package marketWithPatternCommand.entity;
 public class Item {
     private String name;
     private int price;
+    private String currency; // RUB / USD
     private int quantity;
 
 
-    public Item(String name, int price, int quantity) {
+    public Item(String name, int price, String currency, int quantity) {
         this.name = name;
         this.price = price;
+        this.currency = currency;
         this.quantity = quantity;
+    }
+
+    public String getCurrency() {
+        return currency;
     }
 
     public String getName() {

@@ -20,12 +20,11 @@ public class CommandReturnItemsFromBucket implements Command {
     public void execute() {
         String name;
         int quantity;
-        Map<String, Item> items = bucket.getBucket();
-        for (Map.Entry<String, Item> entry : items.entrySet()) {
+        for (Map.Entry<String, Item> entry : bucket.getBucketStorage().entrySet()) {
             name = entry.getKey();
             quantity = entry.getValue().getQuantity();
             store.putItems(name, quantity);
         }
-        items.clear();
+        bucket.clear();
     }
 }

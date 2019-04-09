@@ -11,32 +11,33 @@ import java.io.InputStreamReader;
 
 public class Market {
 
-    private Store store;
-    private Bucket bucket;
     private Buyer buyer;
     private Command showStore;
     private Command putItemInBucket;
     private Command showBucket;
     private Command returnItemsFromBucket;
+    private Command putBucketToRepo;
+    private Command takeBucketFromRepo;
 
-    public Market(Store store) {
-        this.store = store;
-        this.showStore = new CommandShowStore(store);
-        this.bucket = new Bucket();
-        this.buyer = new Buyer();
-        this.putItemInBucket = new CommandPutItemsInBucket(store, bucket, buyer);
-        this.showBucket = new CommandShowBucket(bucket);
-        this.returnItemsFromBucket = new CommandReturnItemsFromBucket(store, bucket);
+    public Market(Store store, Buyer buyer) {
+        this.showStore = new Command1ShowStore(store);
+        this.buyer = buyer;
+        this.putItemInBucket = new Command2PutItemsInBucket(store, buyer);
+        this.showBucket = new Command3ShowBucket(buyer);
+        this.returnItemsFromBucket = new Command4ReturnItemsFromBucket(store, buyer);
+        this.putBucketToRepo = new Command5PutBucketToRepo(buyer);
+        this.takeBucketFromRepo = new Command6TakeBucketFromRepo(buyer);
     }
 
     public void start() {
-        System.out.println("Привет, покупатель!");
-        System.out.println("Что хочешь?");
-        System.out.println("         1 = показать ассортимент магазина");
-        System.out.println("         2 = положить товар в корзину");
-        System.out.println("         3 = показать содержимое корзины");
-        System.out.println("         4 = вернуть товары из корзины");
-        System.out.println("    finish = выйти из магазина");
+        System.out.println("Hi, consumer " + buyer.getName() + "! What do you want?");
+        System.out.println("         1 = show store assortment");
+        System.out.println("         2 = put item in the bucket");
+        System.out.println("         3 = show the contents of the bucket");
+        System.out.println("         4 = return items from bucket to store");
+        System.out.println("         5 = put bucket to repository");
+        System.out.println("         6 = take bucket from repository");
+        System.out.println("    finish = leave the store");
         try {
             buyerDialog();
         } catch (IOException e) {
@@ -50,38 +51,46 @@ public class Market {
         String name;
         int quantity;
         do  {
-            System.out.println(" ...введите команду:");
+            System.out.println(" ...input command:");
             answer = reader.readLine();
             switch (answer) {
                 case "1":
-                    System.out.println("Продавец: вот что у нас есть:");
+                    System.out.println("Seller: that's what we have:");
                     showStore.execute();
                     break;
                 case "2":
-                    System.out.println("Продавец: введите имя товара:");
+                    System.out.println("Seller: input the item name:");
                     name = reader.readLine();
-                    System.out.println("Продавец: введите кол-во товара:");
+                    System.out.println("Seller: input the quantity of item:");
                     quantity = Integer.parseInt(reader.readLine());
-                    buyer.setName(name);
-                    buyer.setQuantity(quantity);
+                    buyer.setNameOfItemToPutInBucket(name);
+                    buyer.setQuantityOfItemToPutInBucket(quantity);
                     putItemInBucket.execute();
                     break;
                 case "3":
-                    System.out.println("Продавец: в вашей корзине лежит:");
+                    System.out.println("Seller: in your bucket are:");
                     showBucket.execute();
                     break;
                 case "4":
-                    System.out.println("Продавец: возвращаю товары из корзины на полки магазина");
+                    System.out.println("Seller: returning items from the bucket to the store shelves");
                     returnItemsFromBucket.execute();
                     break;
+                case "5":
+                    System.out.println("Seller: your basket will be stored in the repo at your name: " + buyer.getName());
+                    putBucketToRepo.execute();
+                    break;
+                case "6":
+                    System.out.println("Seller: here your bucket, " + buyer.getName() + ": ");
+                    takeBucketFromRepo.execute();
+                    break;
                 case "finish":
-                    System.out.println("Продавец: приходите ещё!");
+                    System.out.println("Seller: come again!");
                     break;
                 default:
-                    System.out.println("Продавец: ничего непонятно, повторите");
+                    System.out.println("The seller: nothing is clear, repeat please");
                     break;
             }
         } while (!answer.equals("finish"));
-        System.out.println("Выходим из магазина");
+        System.out.println("You leave the store");
     }
 }

@@ -4,10 +4,14 @@ import marketWithPatternCommand.entity.strategyForBucket.CalcActualPriceRUB;
 import marketWithPatternCommand.entity.strategyForBucket.CalcActualPriceUSD;
 import marketWithPatternCommand.entity.strategyForBucket.Strategy;
 
+import static marketWithPatternCommand.Constants.*;
+
+import java.io.Serializable;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Bucket {
+public class Bucket implements Serializable {
+    static final long serialVersionUID = 1L;
 
     private int totalCost = 0;
     private Map<String, Item> bucketStorage = new TreeMap<>();
@@ -19,31 +23,30 @@ public class Bucket {
             bucketStorage.get(name).setGivenQuantity(item.getQuantity());
         }
         System.out.println("   " +
-                " в козину положили " + name +
-                " в кол-ве " + item.getQuantity() +
-                " шт. Теперь их " + bucketStorage.get(name).getQuantity() +
-                " шт.");
+                " put in the basket " + name +
+                ", in quantity " + item.getQuantity() +
+                ". Now there are " + bucketStorage.get(name).getQuantity() +
+                " units");
         totalCost += calcActualCostOfNewItems(item);
-        System.out.println("    Суммарная стоимость всех товаров в корзине: " + totalCost);
+        System.out.println("    Total price of all items in the bucket: " + totalCost);
     }
 
     private int calcActualCostOfNewItems(Item item) {
-
         Strategy strategy = null;
         String currency = item.getCurrency();
         int price = item.getPrice();
 
         switch (currency) {
-            case "USD":
+            case USD:
                 strategy = new CalcActualPriceUSD();
                 break;
-            case "RUB":
+            case RUB:
                 strategy = new CalcActualPriceRUB();
                 break;
         }
 
         int actualPrice = strategy.execute(price);
-        System.out.println("    Актуальная цена товара " + item.getName() + ": " + actualPrice);
+        System.out.println("    Current price of item " + item.getName() + ": " + actualPrice);
         return actualPrice * item.getQuantity();
 
     }
@@ -58,17 +61,17 @@ public class Bucket {
 
     public void show() {
         if (bucketStorage.isEmpty()) {
-            System.out.println("    пусто");
+            System.out.println("    empty");
         } else {
             for (Map.Entry<String, Item> entry : bucketStorage.entrySet()) {
-                System.out.println("    " +
-                        "название - " + entry.getValue().getName() +
-                        ", цена - " + entry.getValue().getPrice() +
-                        ", валюта - " + entry.getValue().getCurrency() +
-                        ", кол-во - " + entry.getValue().getQuantity()
+                System.out.println("   " +
+                        " name - " + entry.getValue().getName() +
+                        ", price - " + entry.getValue().getPrice() +
+                        ", currency - " + entry.getValue().getCurrency() +
+                        ", quantity - " + entry.getValue().getQuantity()
                 );
             }
-            System.out.println("Суммарная стоимость в рублях: " + totalCost);
+            System.out.println("Total price in rubles: " + totalCost);
         }
     }
 

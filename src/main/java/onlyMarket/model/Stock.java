@@ -3,11 +3,8 @@ package onlyMarket.model;
 import java.util.Map;
 import java.util.TreeMap;
 
-// склад магазина
-
 public class Stock {
 
-    // ключ = id товара
     private Map<Integer, Item> stock = new TreeMap<>();
 
     public void putItems(int quantity, int id) {

@@ -9,15 +9,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
 
-// касса
-
-// reciver
-
 public class CashDesk {
 
     private Stock stock;
     private Consumer consumer;
-
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     public CashDesk(Stock stock, Consumer consumer) {
@@ -55,8 +50,6 @@ public class CashDesk {
         while (!action.equals("finish")) {
             System.out.println("Введите номер действия: ");
             action = reader.readLine();
-
-
 
             switch (action) {
                 case "1": // вывести на экран

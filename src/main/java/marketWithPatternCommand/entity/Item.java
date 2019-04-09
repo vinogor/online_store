@@ -1,11 +1,14 @@
 package marketWithPatternCommand.entity;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item  implements Serializable {
+    static final long serialVersionUID = 1L;
+
     private String name;
     private int price;
     private String currency; // RUB / USD
     private int quantity;
-
 
     public Item(String name, int price, String currency, int quantity) {
         this.name = name;
@@ -51,9 +54,10 @@ public class Item {
     @Override
     public String toString() {
         return "    Item {" +
-                "  name='" + name + '\'' +
-                ", price=" + price +
-                ", quantity=" + quantity +
-                '}';
+                " name = " + name +
+                ", price = " + price +
+                ", currency = " + currency +
+                ", quantity = " + quantity +
+                " }";
     }
 }

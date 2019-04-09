@@ -1,8 +1,5 @@
 package onlyMarket.model;
 
-// карточка товара
-// это POJO ?
-
 public class Item {
 
     private static int nextId = 1;
@@ -13,7 +10,7 @@ public class Item {
     private int quantity;
 
     // для склада (уник id)
-    Item(String name, int price, int quantity) {
+    public Item(String name, int price, int quantity) {
         this.id = nextId;
         nextId++;
         this.name = name;

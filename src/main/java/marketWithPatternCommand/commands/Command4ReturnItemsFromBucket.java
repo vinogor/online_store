@@ -1,30 +1,30 @@
 package marketWithPatternCommand.commands;
 
-import marketWithPatternCommand.entity.Bucket;
+import marketWithPatternCommand.entity.Buyer;
 import marketWithPatternCommand.entity.Item;
 import marketWithPatternCommand.entity.Store;
 
 import java.util.Map;
 
-public class CommandReturnItemsFromBucket implements Command {
+public class Command4ReturnItemsFromBucket implements Command {
 
     private Store store;
-    private Bucket bucket;
+    private Buyer buyer;
 
-    public CommandReturnItemsFromBucket(Store store, Bucket bucket) {
+    public Command4ReturnItemsFromBucket(Store store, Buyer buyer) {
         this.store = store;
-        this.bucket = bucket;
+        this.buyer = buyer;
     }
 
     @Override
     public void execute() {
         String name;
         int quantity;
-        for (Map.Entry<String, Item> entry : bucket.getBucketStorage().entrySet()) {
+        for (Map.Entry<String, Item> entry : buyer.getBucket().getBucketStorage().entrySet()) {
             name = entry.getKey();
             quantity = entry.getValue().getQuantity();
             store.putItems(name, quantity);
         }
-        bucket.clear();
+        buyer.getBucket().clear();
     }
 }

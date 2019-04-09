@@ -4,15 +4,15 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Consumer {
+
+    private String name;
+    private int money;
+    private Map<Integer, Item> basket = new TreeMap<>();
+
     public Consumer(String name, int money) {
         this.name = name;
         this.money = money;
     }
-
-    private String name;
-    private int money;
-
-    private Map<Integer, Item> basket = new TreeMap<>();
 
     public void putOneItem(Item item) {
         int id = item.getId();

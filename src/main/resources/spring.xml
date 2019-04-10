@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	   xmlns:context="http://www.springframework.org/schema/context"
+
+	   xsi:schemaLocation="
+	   http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/jdbc
+	   http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+<!-- создание внутренней БД и указание начальных скриптов для создания таблиц и вставки данных -->
+<!-- URL этой БД будет вот такой:  jdbc:h2:mem:dataSource -->
+	<jdbc:embedded-database id="dataSource1" type="H2">
+		<jdbc:script location="classpath:marketWithPatternCommand/database/SQL/create-db.sql" />
+		<jdbc:script location="classpath:marketWithPatternCommand/database/SQL/insert-data.sql" />
+	</jdbc:embedded-database>
+
+
+<!-- для поиска и регистрации bean-компонентов -->
+	<context:component-scan base-package="marketWithPatternCommand" />
+
+  <!--???  -->
+	<!--<bean id="jdbcTemplate"-->
+		  <!--class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate" >-->
+		<!--<constructor-arg ref="dbcpDataSource" />-->
+	<!--</bean>-->
+
+<!--  ???
+	DBCP = Data Base Connection Pool
+-->
+	<!--<bean id="dbcpDataSource"-->
+		  <!--class="org.apache.commons.dbcp2.BasicDataSource"-->
+		  <!--destroy-method="close">-->
+		<!--<property name="driverClassName" value="org.hsqldb.jdbcDriver" />-->
+		<!--<property name="url" value="jdbc:h2:mem:dataSource" />-->
+		<!--<property name="username" value="user" />-->
+		<!--<property name="password" value="123123" />-->
+	<!--</bean>-->
+
+</beans>

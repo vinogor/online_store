@@ -2,7 +2,7 @@ package marketWithPatternCommand.entity;
 
 import java.io.Serializable;
 
-public class Item  implements Serializable {
+public class Item implements Serializable {
     static final long serialVersionUID = 1L;
 
     private String name;
@@ -14,6 +14,12 @@ public class Item  implements Serializable {
         this.name = name;
         this.price = price;
         this.currency = currency;
+        this.quantity = quantity;
+    }
+
+    public Item(String name, int price, int quantity) {
+        this.name = name;
+        this.price = price;
         this.quantity = quantity;
     }
 
@@ -41,8 +47,6 @@ public class Item  implements Serializable {
         this.quantity += quantity;
     }
 
-
-
     public void incQuantity(int quantity) {
         this.quantity += quantity;
     }
@@ -51,13 +55,12 @@ public class Item  implements Serializable {
         this.quantity -= quantity;
     }
 
-    @Override
-    public String toString() {
-        return "    Item {" +
-                " name = " + name +
-                ", price = " + price +
-                ", currency = " + currency +
-                ", quantity = " + quantity +
-                " }";
+    public void show() {
+        System.out.print("" +
+                " name - " + name +
+                ", price - " + price +
+                ", currency - " + currency +
+                ", quantity - " + quantity
+        );
     }
 }

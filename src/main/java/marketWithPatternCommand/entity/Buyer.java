@@ -21,6 +21,12 @@ public class Buyer {
                 ", money: " + money + " " + RUB);
     }
 
+    public Buyer(Buyer buyer) {
+        this.name = buyer.getName();
+        this.money = buyer.getMoney();
+        this.bucket = new Bucket(buyer.getBucket());
+    }
+
     public Bucket getBucket() {
         return bucket;
     }

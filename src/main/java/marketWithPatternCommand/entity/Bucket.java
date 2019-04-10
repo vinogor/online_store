@@ -16,6 +16,14 @@ public class Bucket implements Serializable {
     private int totalCost = 0;
     private Map<String, Item> bucketStorage = new TreeMap<>();
 
+    public Bucket() {
+    }
+
+    public Bucket(Bucket bucket) {
+        this.bucketStorage = new TreeMap<>(bucket.getBucketStorage());
+        this.totalCost = bucket.getTotalCost();
+    }
+
     public void putItem(String name, Item item) {
         if (bucketStorage.get(name) == null) {
             bucketStorage.put(name, item);

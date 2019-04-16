@@ -14,7 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class SpringRootConfig {
 
     @Autowired
-    @Qualifier("dataSource1")
+    @Qualifier("dataSource")
     DataSource dataSource;
 
 

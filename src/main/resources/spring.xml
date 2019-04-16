@@ -15,7 +15,7 @@
 
 <!-- создание внутренней БД и указание начальных скриптов для создания таблиц и вставки данных -->
 <!-- URL этой БД будет вот такой:  jdbc:h2:mem:dataSource -->
-	<jdbc:embedded-database id="dataSource1" type="H2">
+	<jdbc:embedded-database id="dataSource" type="H2">
 		<jdbc:script location="classpath:marketWithPatternCommand/database/SQL/create-db.sql" />
 		<jdbc:script location="classpath:marketWithPatternCommand/database/SQL/insert-data.sql" />
 	</jdbc:embedded-database>

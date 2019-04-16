@@ -16,19 +16,28 @@
 <!-- создание внутренней БД и указание начальных скриптов для создания таблиц и вставки данных -->
 <!-- URL этой БД будет вот такой:  jdbc:h2:mem:dataSource -->
 	<jdbc:embedded-database id="dataSource" type="H2">
-		<jdbc:script location="classpath:marketWithPatternCommand/database/SQL/create-db.sql" />
-		<jdbc:script location="classpath:marketWithPatternCommand/database/SQL/insert-data.sql" />
+		<!--<jdbc:script location="classpath:marketWithPatternCommand/database/SQL/create-db.sql" />-->
+		<jdbc:script location="classpath:SQL/create-db.sql" />
+		<jdbc:script location="classpath:SQL/insert-data.sql" />
 	</jdbc:embedded-database>
 
 
 <!-- для поиска и регистрации bean-компонентов -->
 	<context:component-scan base-package="marketWithPatternCommand" />
 
-  <!--???  -->
-	<!--<bean id="jdbcTemplate"-->
-		  <!--class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate" >-->
-		<!--<constructor-arg ref="dbcpDataSource" />-->
+	<!--<bean id="dataSource2" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+		<!--<property name="driverClassName" value="org.h2.Driver" />-->
+		<!--<property name="url" value="jdbc:h2:db/SpringDB.db" />-->
+		<!--<property name="username" value="" />-->
+		<!--<property name="password" value="" />-->
 	<!--</bean>-->
+
+
+   <!--создание JdbcTemplate через xml-->
+	<bean id="jdbcTemplate2"
+		  class="org.springframework.jdbc.core.JdbcTemplate" >
+		<constructor-arg ref="dataSource" />
+	</bean>
 
 <!--  ???
 	DBCP = Data Base Connection Pool

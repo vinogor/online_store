@@ -15,7 +15,7 @@ public class SpringRootConfig {
 
     @Autowired
     @Qualifier("dataSource")
-    DataSource dataSource;
+    public DataSource dataSource;
 
 
     @Bean

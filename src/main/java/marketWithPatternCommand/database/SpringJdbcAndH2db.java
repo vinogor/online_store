@@ -6,19 +6,24 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Component
+@Service
 public class SpringJdbcAndH2db {
 
-    @Autowired
-    @Qualifier("jdbcTemplate")
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
-    void getItems() {
+//    @Qualifier("jdbcTemplate")
+    @Autowired
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    public void getItems() {
 //        System.out.println(jdbcTemplate);
         List<Item> results = jdbcTemplate.query(
                 "SELECT * FROM store",

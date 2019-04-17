@@ -8,9 +8,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class TestMainSpringJDBC {
 
-    @Autowired
-    private static SpringJdbcAndH2db db;
-
     public static void main(String[] args) {
 
         ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext("spring.xml");
@@ -18,8 +15,8 @@ public class TestMainSpringJDBC {
 //        SpringJdbcAndH2db springJdbcAndH2db = (SpringJdbcAndH2db) appContext.getBean("springJdbcAndH2db");
 //        springJdbcAndH2db.getItems();
 
-        System.out.println(db);
-        db.getItems();
+        SomeClass someClass = new SomeClass();
+        someClass.start();
 
         appContext.close();
     }

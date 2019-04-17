@@ -1,6 +1,8 @@
 package marketWithPatternCommand;
 
 import marketWithPatternCommand.entity.*;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.lang.reflect.Proxy;
 
@@ -9,6 +11,8 @@ import static marketWithPatternCommand.Constants.*;
 public class Main {
 
     public static void main(String[] args) {
+
+        ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext("spring.xml");
 
         Store storeOrig = new Store();
 
@@ -31,5 +35,7 @@ public class Main {
 
         Market market = new Market(storeOrig, buyer);
         market.start();
+
+        appContext.close();
     }
 }

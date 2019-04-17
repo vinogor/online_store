@@ -1,6 +1,5 @@
-package marketWithPatternCommand.database;
+package marketWithPatternCommand.testDatabase;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
@@ -12,11 +11,11 @@ public class TestMainSpringJDBC {
 
         ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext("spring.xml");
 
-//        SpringJdbcAndH2db springJdbcAndH2db = (SpringJdbcAndH2db) appContext.getBean("springJdbcAndH2db");
-//        springJdbcAndH2db.getItems();
+        WorkWithDB workWithDB = (WorkWithDB) appContext.getBean("workWithDB");
+        workWithDB.getItems();
 
-        SomeClass someClass = new SomeClass();
-        someClass.start();
+//        SomeClass someClass = new SomeClass();
+//        someClass.start();
 
         appContext.close();
     }

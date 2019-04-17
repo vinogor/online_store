@@ -10,6 +10,9 @@ public class Item implements Serializable {
     private String currency; // RUB / USD
     private int quantity;
 
+    public Item() {
+    }
+
     public Item(String name, int price, String currency, int quantity) {
         this.name = name;
         this.price = price;
@@ -37,6 +40,18 @@ public class Item implements Serializable {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     public void setQuantity(int quantity) {

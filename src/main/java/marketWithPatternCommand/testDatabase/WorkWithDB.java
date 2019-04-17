@@ -1,4 +1,4 @@
-package marketWithPatternCommand.database;
+package marketWithPatternCommand.testDatabase;
 
 import marketWithPatternCommand.entity.Item;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Service
-public class SpringJdbcAndH2db {
+public class WorkWithDB {
 
     private JdbcTemplate jdbcTemplate;
 
@@ -22,9 +22,10 @@ public class SpringJdbcAndH2db {
     }
 
     public void getItems() {
-//        System.out.println(jdbcTemplate);
+        System.out.println("jdbcTemplate: " + jdbcTemplate);
         List<Item> results = jdbcTemplate.query(
-                "SELECT * FROM store",
+//                "SELECT * FROM store",
+                "SELECT * FROM my_base.store",
                 new RowMapper<Item>() {
                     @Override
                     public Item mapRow(ResultSet rs, int rowNum) throws SQLException {

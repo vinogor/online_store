@@ -5,20 +5,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-
-public class DBtest {
+@Component
+public class SpringJdbcAndH2db {
 
     @Autowired
-    @Qualifier("jdbcTemplate2")
+    @Qualifier("jdbcTemplate")
     JdbcTemplate jdbcTemplate;
 
-    void getTableStore() {
-        System.out.println(jdbcTemplate);
+    void getItems() {
+//        System.out.println(jdbcTemplate);
         List<Item> results = jdbcTemplate.query(
                 "SELECT * FROM store",
                 new RowMapper<Item>() {
@@ -32,7 +33,9 @@ public class DBtest {
                     }
                 });
 
-
-        System.out.println(results.toString());
+        for (Item item : results) {
+            item.show();
+            System.out.println();
+        }
     }
 }

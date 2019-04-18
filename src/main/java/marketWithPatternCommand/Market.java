@@ -1,8 +1,8 @@
 package marketWithPatternCommand;
 
 import marketWithPatternCommand.commands.*;
-import marketWithPatternCommand.entity.Bucket;
 import marketWithPatternCommand.entity.Buyer;
+import marketWithPatternCommand.entity.Orders;
 import marketWithPatternCommand.entity.Store;
 
 import java.io.BufferedReader;
@@ -18,6 +18,9 @@ public class Market {
     private Command returnItemsFromBucket;
     private Command putBucketToRepo;
     private Command takeBucketFromRepo;
+    private Command makePurchase;
+
+    private Orders orders = new Orders();
 
     public Market(Store store, Buyer buyer) {
         this.showStore = new Command1ShowStore(store);
@@ -27,6 +30,7 @@ public class Market {
         this.returnItemsFromBucket = new Command4ReturnItemsFromBucket(store, buyer);
         this.putBucketToRepo = new Command5PutBucketToRepo(buyer);
         this.takeBucketFromRepo = new Command6TakeBucketFromRepo(buyer);
+        this.makePurchase = new Command7MakePurchase(buyer, orders);
     }
 
     public void start() {
@@ -37,6 +41,8 @@ public class Market {
         System.out.println("         4 = return items from bucket to store");
         System.out.println("         5 = put bucket to repository");
         System.out.println("         6 = take bucket from repository");
+        System.out.println("         7 = make purchase");
+        System.out.println("         8 = show previous orders");
         System.out.println("    finish = leave the store");
         try {
             buyerDialog();
@@ -82,6 +88,14 @@ public class Market {
                 case "6":
                     System.out.println("Seller: here your bucket, " + buyer.getName() + ": ");
                     takeBucketFromRepo.execute();
+                    break;
+                case "7": // money is not considered yet
+                    System.out.println("Seller: thank you for your purchase!");
+                    makePurchase.execute();
+                    break;
+                case "8":
+                    System.out.println("Here your previous order: ");
+                    orders.showOrders();
                     break;
                 case "finish":
                     System.out.println("Seller: come again!");

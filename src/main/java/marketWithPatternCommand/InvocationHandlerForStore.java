@@ -25,9 +25,9 @@ public class InvocationHandlerForStore implements InvocationHandler {
         if (method.getName().equals("addItem")) {
             if (args[0] instanceof ItemWithShelfLife) {
 
-                Class clss = args[0].getClass();
+                Class clazz = args[0].getClass();
 
-                Field[] fields = clss.getDeclaredFields();
+                Field[] fields = clazz.getDeclaredFields();
 
                 Calendar c1 = new GregorianCalendar(); // текущее время
                 Calendar c2 = (GregorianCalendar) c1.clone(); // +7 дней
@@ -39,7 +39,7 @@ public class InvocationHandlerForStore implements InvocationHandler {
                     if (f.isAnnotationPresent(FieldToSetDate.class)){
                         FieldToSetDate fieldToSetDate = f.getAnnotation(FieldToSetDate.class);
                         if (fieldToSetDate.dateType() == 1) {
-                            f.set(args[0], c1); // ??? зачем надо указывать объект куда присваивать? Разве и так это не понятно?
+                            f.set(args[0], c1);
                         }
                         if (fieldToSetDate.dateType() == 2) {
                             f.set(args[0], c2);
@@ -47,7 +47,7 @@ public class InvocationHandlerForStore implements InvocationHandler {
                     }
                 }
 
-                // СПОСОБО БЕЗ АННОТАЦИЙ (работает)
+                // СПОСОБ БЕЗ АННОТАЦИЙ (работает)
 //                for (Field f : fields) {
 //                    f.setAccessible(true);
 //
@@ -58,6 +58,7 @@ public class InvocationHandlerForStore implements InvocationHandler {
 //                        f.set(args[0], c2);
 //                    }
 //                }
+
             }
         }
         return method.invoke(origStore, args);

@@ -3,6 +3,7 @@ package marketWithPatternCommand.entity;
 import marketWithPatternCommand.entity.strategyForBucket.CalcActualPriceRUB;
 import marketWithPatternCommand.entity.strategyForBucket.CalcActualPriceUSD;
 import marketWithPatternCommand.entity.strategyForBucket.Strategy;
+import org.springframework.stereotype.Component;
 
 import static marketWithPatternCommand.Constants.*;
 
@@ -10,11 +11,20 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.TreeMap;
 
+@Component
 public class Bucket implements Serializable {
     static final long serialVersionUID = 1L;
 
     private int totalCost = 0;
     private Map<String, Item> bucketStorage = new TreeMap<>();
+
+    public Bucket() {
+    }
+
+    public Bucket(Bucket bucket) {
+        this.bucketStorage = new TreeMap<>(bucket.getBucketStorage());
+        this.totalCost = bucket.getTotalCost();
+    }
 
     public void putItem(String name, Item item) {
         if (bucketStorage.get(name) == null) {

@@ -15,11 +15,13 @@ public interface BucketDao {
 
     String SQL_FIND_ALL = "SELECT * FROM " + MYSQL_TABLE_BUCKET;
     String SQL_FIND_BY_NAME = SQL_FIND_ALL + " WHERE " + "name" + " = ?";
-    String SQL_INSERT = "INSERT INTO " + MYSQL_TABLE_BUCKET + " (" + "name" + ", " + "price"  + ", " + "quantity" + ") values (?, ?, ?)";
+    String SQL_INSERT_PARAMETERIZED = "" +
+            "INSERT INTO " + MYSQL_TABLE_BUCKET + " (" + "name" + ", " + "price"  + ", " + "quantity" +
+            ") values (:nameParam, :priceParam, :quantityParam)";
     String SQL_UPDATE = "UPDATE " + MYSQL_TABLE_BUCKET + " SET " + "quantity" + " = ?" + " WHERE " + "name" + " = ?";
     String SQL_DELETE = "DELETE FROM " + MYSQL_TABLE_BUCKET + " WHERE " + "name" + " = ?";
 
-//  CRUD (Create, Read, Update, Delete) - создание, чтение, обновление и удаление.
+//  реализуем CRUD (Create, Read, Update, Delete) - создание, чтение, обновление и удаление.
 
     // получить все Item
     List<Item> findAll();

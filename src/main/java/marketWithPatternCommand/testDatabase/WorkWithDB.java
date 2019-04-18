@@ -15,7 +15,7 @@ public class WorkWithDB {
 
     private JdbcTemplate jdbcTemplate;
 
-//    @Qualifier("jdbcTemplate")
+    //    @Qualifier("jdbcTemplate")
     @Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

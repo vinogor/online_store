@@ -15,10 +15,11 @@
 
     <!-- создание внутренней БД тип H2 и указание начальных скриптов для создания таблиц и вставки данных -->
     <!-- URL этой БД будет вот такой:  jdbc:h2:mem:dataSource -->
-	<jdbc:embedded-database id="dataSourceH2" type="H2">
-		<jdbc:script location="classpath:SQLforH2/create-db.sql" />
-		<jdbc:script location="classpath:SQLforH2/insert-data.sql" />
-	</jdbc:embedded-database>
+
+<!--	<jdbc:embedded-database id="dataSourceH2" type="H2">-->
+<!--		<jdbc:script location="classpath:SQLforH2/create-db.sql" />-->
+<!--		<jdbc:script location="classpath:SQLforH2/insert-data.sql" />-->
+<!--	</jdbc:embedded-database>-->
 
 	<!-- БД mySQL -->
 	<bean id="dataSourceMySQL" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
